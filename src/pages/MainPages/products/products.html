@@ -47,7 +47,7 @@
   <ion-card *ngIf="prods.length">
     <ion-card-content>
       <ion-grid>
-        <ion-row text-left *ngFor="let p of prods">
+        <ion-row text-left class="prodRow"  margin-vertical *ngFor="let p of prods">
           <ion-col col-2>
             {{p.Name}}
           </ion-col>

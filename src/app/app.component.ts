@@ -12,6 +12,7 @@ import { CategoriesPage } from '../pages/Categories/categories/categories';
 import { FaqsPage } from '../pages/Extra/Faqs/faqs/faqs';
 import { FaqsUserPage } from '../pages/Extra/Faqs/faqs-user/faqs-user';
 import { FaqsVendorPage } from '../pages/Extra/Faqs/faqs-vendor/faqs-vendor';
+import { SellersDetailsPage } from '../pages/Sellers/sellers-details/sellers-details';
 @Component({
   templateUrl: 'app.html'
 })
@@ -51,7 +52,7 @@ export class MyApp {
         firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
             if(itemSnap.exists()){
               var welMsg = "Welcome"+" "+itemSnap.val().Name;
-              this.rootPage = DashboardPage;
+              this.rootPage = SellersDetailsPage;
               this.presentToast(welMsg);
             }else{
               firebase.auth().signOut().then(()=>{

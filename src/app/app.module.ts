@@ -7,7 +7,7 @@ import { UserOptionsPage } from '../pages/Users/user-options/user-options';
 import * as firebase from 'firebase';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import {AngularFireAuthModule} from 'angularfire2/auth';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { SellersDetailsPage } from '../pages/Sellers/sellers-details/sellers-details';
 import { DashboardPage } from '../pages/MainPages/dashboard/dashboard';
 import { LoginPage } from '../pages/Auth/login/login';
@@ -30,6 +30,8 @@ import { SubCatItemViewPage } from '../pages/Categories/SubCatItem/sub-cat-item-
 import { FaqsPage } from '../pages/Extra/Faqs/faqs/faqs';
 import { FaqsUserPage } from '../pages/Extra/Faqs/faqs-user/faqs-user';
 import { FaqsVendorPage } from '../pages/Extra/Faqs/faqs-vendor/faqs-vendor';
+import { SellerProductsPage } from '../pages/Sellers/seller-products/seller-products';
+import { SellerSalesPage } from '../pages/Sellers/seller-sales/seller-sales';
 
 
 
@@ -68,10 +70,12 @@ firebase.initializeApp(firebaseCred);
     SubCateViewPage,
     AddSubCatPage,
     AddSubCatItemPage,
-    SubCatItemViewPage, 
+    SubCatItemViewPage,
     FaqsPage,
     FaqsUserPage,
-    FaqsVendorPage,   
+    FaqsVendorPage,
+    SellerProductsPage,
+    SellerSalesPage,
   ],
   imports: [
     BrowserModule,
@@ -103,14 +107,16 @@ firebase.initializeApp(firebaseCred);
     SubCateViewPage,
     AddSubCatPage,
     AddSubCatItemPage,
-    SubCatItemViewPage,    
+    SubCatItemViewPage,
     FaqsPage,
     FaqsUserPage,
-    FaqsVendorPage,   
+    FaqsVendorPage,
+    SellerProductsPage,
+    SellerSalesPage,
 
   ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
-export class AppModule {}
+export class AppModule { }

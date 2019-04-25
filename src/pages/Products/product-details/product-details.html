@@ -12,9 +12,9 @@
       <ion-col col-6>
 
 
-        <button ion-button float-right (click)="vProduct()" *ngIf="!ver" >Verify Product</button>
-        <button ion-button float-right (click)="uProduct()" *ngIf="ver" >Unverify Product</button>
-  
+        <button ion-button float-right (click)="vProduct()" *ngIf="!ver">Verify Product</button>
+        <button ion-button float-right (click)="uProduct()" *ngIf="ver">Unverify Product</button>
+
         <ion-card>
           <ion-card-content>
 
@@ -34,12 +34,12 @@
               <p item-end>{{prod.Quantity}}</p>
             </ion-item>
 
-            <ion-item *ngIf="prod.Color" >
+            <ion-item *ngIf="prod.Color">
               <p item-start ion-text color="primary">Color</p>
               <p item-end>{{prod.Color}}</p>
             </ion-item>
 
-            <ion-item *ngIf="prod.Size" >
+            <ion-item *ngIf="prod.Size">
               <p item-start ion-text color="primary">Size</p>
               <p item-end>{{prod.Size}}</p>
             </ion-item>
@@ -77,13 +77,15 @@
       <ion-col col-6>
         <ion-card>
           <ion-card-content>
-            <img [src]="prod.ImageUrl" />
+            <img [src]="prod.ImageUrl" class="prodImg" />
           </ion-card-content>
         </ion-card>
-        <ion-card *ngIf="prod.key" >
+        <ion-card *ngIf="prod.key">
           <ion-card-content>
             <button ion-button float-right (click)="viewBar()">Print</button>
-            <ngx-qrcode [qrc-value]="prod.key"></ngx-qrcode>
+            <div class="barD">
+              <ngx-qrcode [qrc-value]="prod.key"></ngx-qrcode>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-col>
