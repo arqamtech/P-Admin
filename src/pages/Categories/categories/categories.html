@@ -20,8 +20,9 @@
   <ion-grid>
     <ion-row>
       <ion-col col-3 (click)="gtSubCat(c)" *ngFor="let c of cats">
-        <ion-card  >
-          <ion-card-content>
+        <ion-card>
+          <ion-card-content text-center>
+            <img [src]="c.Image" class="catImg" />
             <ion-card-title>{{c.Name}}</ion-card-title>
           </ion-card-content>
         </ion-card>

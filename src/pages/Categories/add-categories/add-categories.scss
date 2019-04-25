@@ -1,6 +1,40 @@
 page-add-categories {
-    ion-input{
-        border-bottom: 1px solid map-get($colors, primary);
-    }
-    
+  ion-input {
+    border-bottom: 1px solid map-get($colors, primary);
+  }
+  .name {
+    border-bottom: solid 1px #209e91;
+  }
+
+  .select {
+    background-color: #209e91;
+    margin-top: 3%;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-bottom: 3%;
+  }
+
+  #file-input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  .editBtns {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    -webkit-transition: 0.5s ease;
+    transition: 0.5s ease;
+    opacity: 0;
+  }
+
+  .item:hover .imgView {
+    opacity: 0.3;
+  }
+
+  .item:hover .editBtns {
+    opacity: 1;
+  }
 }

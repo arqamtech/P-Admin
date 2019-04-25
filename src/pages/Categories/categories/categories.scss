@@ -1,5 +1,10 @@
 page-categories {
-ion-col{
+  ion-col {
     cursor: pointer;
-}
+  }
+  .catImg {
+    height: 100px;
+    width: auto;
+    margin: auto;
+  }
 }
