@@ -10,6 +10,7 @@ import { BannersPage } from '../pages/MainPages/banners/banners';
 import { ProductsPage } from '../pages/MainPages/products/products';
 import { CategoriesPage } from '../pages/Categories/categories/categories';
 import { FaqsPage } from '../pages/Extra/Faqs/faqs/faqs';
+import { SettingsPage } from '../pages/Admins/settings/settings';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,27 +18,28 @@ import { FaqsPage } from '../pages/Extra/Faqs/faqs/faqs';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any ;
+  rootPage: any;
   activePage: any;
 
-  full : boolean = true;
+  full: boolean = true;
 
-  pages: Array<{ title: string, component: any, icon: any, color : string }>;
+  pages: Array<{ title: string, component: any, icon: any, color: string }>;
 
   constructor(
-    public platform: Platform,    
+    public platform: Platform,
     public toastCtrl: ToastController,
-    ) {
-      this.initializeApp();
+  ) {
+    this.initializeApp();
 
     this.pages = [
-      { title: 'DashBoard', component: DashboardPage, icon: "ios-analytics",color: "whiter" },
-      { title: 'Sellers', component: SellersViewPage, icon: "md-ionitron",color: "whiter" },
-      { title: 'Categories', component: CategoriesPage, icon: "logo-buffer",color: "whiter" },
-      { title: 'Products', component: ProductsPage, icon: "md-cube",color: "whiter" },
-      { title: 'Users', component: UsersPage, icon: "ios-people",color: "whiter" },
-      { title: 'Banners', component: BannersPage, icon: "md-images",color: "whiter" },
-      { title: "Faq's", component: FaqsPage, icon: "md-help",color: "whiter" },
+      { title: 'DashBoard', component: DashboardPage, icon: "ios-analytics", color: "whiter" },
+      { title: 'Sellers', component: SellersViewPage, icon: "md-ionitron", color: "whiter" },
+      { title: 'Categories', component: CategoriesPage, icon: "logo-buffer", color: "whiter" },
+      { title: 'Products', component: ProductsPage, icon: "md-cube", color: "whiter" },
+      { title: 'Users', component: UsersPage, icon: "ios-people", color: "whiter" },
+      { title: 'Banners', component: BannersPage, icon: "md-images", color: "whiter" },
+      { title: "Faq's", component: FaqsPage, icon: "md-help", color: "whiter" },
+      { title: "Settings", component: SettingsPage, icon: "md-cog", color: "whiter" },
     ];
     this.activePage = this.pages[0];
 
@@ -47,23 +49,23 @@ export class MyApp {
     this.platform.ready().then(() => {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-        firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
-            if(itemSnap.exists()){
-              var welMsg = "Welcome"+" "+itemSnap.val().Name;
+          firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value', itemSnap => {
+            if (itemSnap.exists()) {
+              var welMsg = "Welcome" + " " + itemSnap.val().Name;
               this.rootPage = DashboardPage;
               this.presentToast(welMsg);
-            }else{
-              firebase.auth().signOut().then(()=>{
+            } else {
+              firebase.auth().signOut().then(() => {
                 this.rootPage = LoginPage;
                 this.presentToast("You are not registered a Admin")
               })
             }
-    });
-      }
-      else{
-        this.rootPage = LoginPage;
-      }
-    });  
+          });
+        }
+        else {
+          this.rootPage = LoginPage;
+        }
+      });
     });
   }
 
@@ -84,22 +86,22 @@ export class MyApp {
       console.log(error.message);
     });
 
- 
-}
-presentToast(msg) {
-  let toast = this.toastCtrl.create({
-    message: msg,
-    duration: 4000,
-    position : "top",
-    showCloseButton: false,
-  });
-  toast.present();
-}
-collapse(){
-  this.full = false;
-}
-expand(){
-  this.full = true;
-}
+
+  }
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 4000,
+      position: "top",
+      showCloseButton: false,
+    });
+    toast.present();
+  }
+  collapse() {
+    this.full = false;
+  }
+  expand() {
+    this.full = true;
+  }
 
 }

@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end>
+      <button ion-button padding-right margin-right clear icon-only (click)="gtNoti($event)">
+        <ion-icon name="md-notifications"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-item no-lines class="content">
+    <h1 class="title">Settings</h1>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 col-md-6 offset-md-3>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>{{name}}</ion-card-title>
+            <ion-item>
+              <p item-start color="primary" ion-text>Email</p>
+              <p item-end>{{email}}</p>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-content *ngIf="!isEdit">
+            <button ion-button float-right (click)="editData()" clear icon-only>
+              <ion-icon name="create"></ion-icon>
+            </button>
+            <ion-item>
+              <p item-start color="primary" ion-text>Commission</p>
+              <p item-end>{{commission}}</p>
+            </ion-item>
+
+            <ion-item>
+              <p item-start color="primary" ion-text>Payment Key</p>
+              <p item-end>{{paymentKey}}</p>
+            </ion-item>
+
+          </ion-card-content>
+
+
+          <ion-card-content *ngIf="isEdit">
+            <ion-item>
+              <ion-label floating>Commission</ion-label>
+              <ion-input type="number" [(ngModel)]="commission"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Payment Key</ion-label>
+              <ion-input type="text" [(ngModel)]="paymentKey"></ion-input>
+            </ion-item>
+
+            <button ion-button float-right (click)="confirmUpdate()">Update</button>
+            <button ion-button color="light" float-right (click)="cancel()">Cancel</button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

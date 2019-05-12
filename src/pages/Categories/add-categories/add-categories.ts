@@ -28,7 +28,7 @@ export class AddCategoriesPage {
     if (this.catName) {
       if (this.img2) {
         this.addCat();
-      } else { this.presentToast("Select an icon for Categoy"); }
+      } else { this.presentToast("Select an icon for Category"); }
     } else { this.presentToast("Category Name Empty"); }
   }
 

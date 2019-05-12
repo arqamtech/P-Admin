@@ -13,46 +13,79 @@ export class AddSubCatPage {
 
   cat = this.navParams.get("cat");
 
-  catName : string;
-
+  catName: string;
+  img1: any;
+  img2: any;
+  url: any;
 
   constructor(
-  public navCtrl: NavController, 
-  public navParams: NavParams,
-  public loadingCtrl : LoadingController,
-  public toastCtrl : ToastController,
-  public viewCtrl : ViewController,
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public toastCtrl: ToastController,
+    public viewCtrl: ViewController,
   ) {
   }
 
 
+  checkData() {
+    if (this.catName) {
+      if (this.img2) {
+        this.addCat();
+      } else { this.presentToast("Select an icon for Sub Category"); }
+    } else { this.presentToast("Sub Category Name Empty"); }
+  }
 
-  addCat(){
 
-    if(this.catName){
 
+  addCat() {
 
     let loading = this.loadingCtrl.create({
-      content: 'Adding Category...'
+      content: 'Adding Sub Category...'
     });
     loading.present();
 
-    firebase.database().ref("SubCategories").push({
-      Name : this.catName,
-      TimeStamp : moment().format(),
-    }).then((res)=>{
-      firebase.database().ref("SubCatsIndex").child(this.cat.key).child(res.key).set(true).then(()=>{
-        this.presentToast("Sub Category Added");
-        loading.dismiss();
-        this.close();
-      }); 
+    firebase.storage().ref("SubCategories/" + this.catName).put(this.img2).then(() => {
+      firebase.storage().ref("SubCategories/" + this.catName).getDownloadURL().then((dURL) => {
+        this.url = dURL;
+      }).then(() => {
+        firebase.database().ref("SubCategories").push({
+          Name: this.catName,
+          Image: this.url,
+          TimeStamp: moment().format(),
+        }).then((res) => {
+          firebase.database().ref("SubCatsIndex").child(this.cat.key).child(res.key).set(true).then(() => {
+            this.presentToast("Sub Category Added");
+            loading.dismiss();
+            this.close();
+          });
+        });
+      });
     });
-  }else{
-    this.presentToast("Category Name Empty");
-  }
   }
 
-  close(){
+
+
+  fileChange(event) {
+    if (event.target.files && event.target.files[0]) {
+      let reader = new FileReader();
+
+      reader.onload = (event: any) => {
+        this.img1 = event.target.result;
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    let fileList: FileList = event.target.files;
+    let file: File = fileList[0];
+    this.img2 = file;
+  }
+
+
+  removeImage() {
+    this.img1 = null;
+  }
+
+  close() {
     this.viewCtrl.dismiss();
   }
 

@@ -32,6 +32,7 @@ import { FaqsUserPage } from '../pages/Extra/Faqs/faqs-user/faqs-user';
 import { FaqsVendorPage } from '../pages/Extra/Faqs/faqs-vendor/faqs-vendor';
 import { SellerProductsPage } from '../pages/Sellers/seller-products/seller-products';
 import { SellerSalesPage } from '../pages/Sellers/seller-sales/seller-sales';
+import { SettingsPage } from '../pages/Admins/settings/settings';
 
 
 
@@ -76,6 +77,7 @@ firebase.initializeApp(firebaseCred);
     FaqsVendorPage,
     SellerProductsPage,
     SellerSalesPage,
+    SettingsPage,
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,7 @@ firebase.initializeApp(firebaseCred);
     FaqsVendorPage,
     SellerProductsPage,
     SellerSalesPage,
-
+    SettingsPage,
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler }

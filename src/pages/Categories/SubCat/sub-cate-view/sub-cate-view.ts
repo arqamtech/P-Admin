@@ -16,25 +16,26 @@ export class SubCateViewPage {
 
   c = this.navParams.get("cat");
 
-  cats : Array<any> = [];
+  cats: Array<any> = [];
 
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public navParams: NavParams,
-    public db : AngularFireDatabase,
+    public db: AngularFireDatabase,
   ) {
     this.getCats();
   }
 
 
-  getCats(){
-    this.db.list(`SubCatsIndex/${this.c.key}`).snapshotChanges().subscribe(snap=>{
+  getCats() {
+    this.db.list(`SubCatsIndex/${this.c.key}`).snapshotChanges().subscribe(snap => {
       this.cats = [];
-      snap.forEach(snip=>{
-        firebase.database().ref("SubCategories").child(snip.key).once("value",ssnip=>{
-          var temp : any = ssnip.val();
+      snap.forEach(snip => {
+        firebase.database().ref("SubCategories").child(snip.key).once("value", ssnip => {
+          var temp: any = ssnip.val();
           temp.key = ssnip.key;
+          console.log(temp)
           this.cats.push(temp);
         })
       })
@@ -42,12 +43,12 @@ export class SubCateViewPage {
   }
 
 
-  gtSubCat(c){
-    this.navCtrl.push(SubCatItemViewPage,{cat : c});
+  gtSubCat(c) {
+    this.navCtrl.push(SubCatItemViewPage, { cat: c });
   }
 
   gtAddCat() {
-    let profileModal = this.modalCtrl.create(AddSubCatPage,{cat : this. c});
+    let profileModal = this.modalCtrl.create(AddSubCatPage, { cat: this.c });
     profileModal.present();
   }
 }
